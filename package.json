@@ -1,0 +1,25 @@
+{
+  "name": "pepper",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "workspaces": [
+    "packages/compiler",
+    "packages/loader",
+    "packages/runtime"
+  ],
+  "scripts": {
+    "start": "npx http-server . -o ./samples/todo/todo.html -bg"
+  },
+  "keywords": [
+    "js",
+    "javascript",
+    "frontend",
+    "framework"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "@types/node": "^20.9.2"
+  }
+}
