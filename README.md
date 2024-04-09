@@ -13,7 +13,7 @@ GIT:https://git-scm.com/
 
 Familiazate con el: https://git-scm.com/docs/git/es
 
-Una ves te sientas comoda has las proximas aciones.
+Una ves te sientas comoda haz las proximas aciones.
 
 Objectivo:
 * Clonar este REPO
