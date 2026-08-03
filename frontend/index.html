@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pepper — Coffee Cart</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <h1>☕ Pepper Coffee</h1>
+      <button id="cart-toggle" class="cart-toggle" aria-label="Open cart">
+        Cart <span id="cart-count" class="badge">0</span>
+      </button>
+    </header>
+
+    <main>
+      <section aria-labelledby="catalog-heading">
+        <h2 id="catalog-heading">Shop</h2>
+        <div id="products" class="product-grid">
+          <p class="muted">Loading products…</p>
+        </div>
+      </section>
+    </main>
+
+    <aside id="cart-drawer" class="cart-drawer" aria-hidden="true">
+      <div class="cart-header">
+        <h2 id="drawer-title">Your Cart</h2>
+        <button id="cart-close" class="icon-btn" aria-label="Close cart">✕</button>
+      </div>
+
+      <!-- View: cart line items -->
+      <section id="view-cart" class="drawer-view">
+        <div id="cart-items" class="cart-items"></div>
+        <div class="cart-footer">
+          <div class="subtotal-row">
+            <span>Subtotal</span>
+            <span id="cart-subtotal">$0.00</span>
+          </div>
+          <button id="clear-cart" class="secondary-btn">Clear cart</button>
+          <button id="go-checkout" class="primary-btn">Checkout</button>
+        </div>
+      </section>
+
+      <!-- View: checkout form -->
+      <section id="view-checkout" class="drawer-view" hidden>
+        <form id="checkout-form" class="checkout-form" novalidate>
+          <label>
+            Full name
+            <input name="name" type="text" autocomplete="name" required />
+          </label>
+          <label>
+            Email
+            <input name="email" type="email" autocomplete="email" required />
+          </label>
+          <label>
+            Shipping address
+            <textarea name="address" rows="3" autocomplete="street-address" required></textarea>
+          </label>
+
+          <div class="order-summary">
+            <div class="summary-row"><span>Subtotal</span><span id="sum-subtotal">$0.00</span></div>
+            <div class="summary-row"><span>Tax</span><span id="sum-tax">$0.00</span></div>
+            <div class="summary-row"><span>Shipping</span><span id="sum-shipping">$0.00</span></div>
+            <div class="summary-row total"><span>Total</span><span id="sum-total">$0.00</span></div>
+          </div>
+
+          <p id="checkout-error" class="form-error" role="alert" hidden></p>
+
+          <div class="cart-footer">
+            <button type="button" id="back-to-cart" class="secondary-btn">Back</button>
+            <button type="submit" id="place-order" class="primary-btn">Place order</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- View: order confirmation -->
+      <section id="view-confirmation" class="drawer-view" hidden>
+        <div class="confirmation">
+          <div class="check-circle">✓</div>
+          <h3>Thanks for your order!</h3>
+          <p class="order-id">Order <strong id="conf-order-id"></strong></p>
+          <p class="muted" id="conf-summary"></p>
+          <p class="muted" id="conf-email"></p>
+          <button id="keep-shopping" class="primary-btn">Keep shopping</button>
+        </div>
+      </section>
+    </aside>
+
+    <div id="overlay" class="overlay" hidden></div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
