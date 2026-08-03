@@ -40,6 +40,9 @@ Base path: `/api`
 | `PATCH`  | `/cart/items/:productId`   | Set exact quantity `{ quantity }` (0 removes)|
 | `DELETE` | `/cart/items/:productId`   | Remove a line                                |
 | `DELETE` | `/cart`                    | Empty the cart                               |
+| `GET`    | `/checkout/summary`        | Price breakdown (subtotal, tax, shipping)    |
+| `POST`   | `/checkout`                | Place an order `{ customer: {…} }`           |
+| `GET`    | `/orders/:id`              | Fetch a placed order                         |
 
 ### Cart response shape
 
@@ -60,9 +63,45 @@ Base path: `/api`
 }
 ```
 
+### Checkout
+
+`POST /checkout` takes the shopper's details and turns the current cart into a
+confirmed order:
+
+```json
+{
+  "customer": {
+    "name": "Ada Lovelace",
+    "email": "ada@example.com",
+    "address": "1 Analytical Way"
+  }
+}
+```
+
+The server validates the fields, computes tax (8%) and shipping (flat $5, free
+over $75), records the order, empties the cart, and returns the order:
+
+```json
+{
+  "id": "ORD-1000",
+  "status": "confirmed",
+  "customer": { "name": "Ada Lovelace", "email": "…", "address": "…" },
+  "items": [ … ],
+  "subtotal": 90.5,
+  "tax": 7.24,
+  "shipping": 0,
+  "total": 97.74
+}
+```
+
+In the UI the **Checkout** button opens a form inside the cart drawer with a live
+order summary; placing the order shows a confirmation with the order number.
+
 ## Notes
 
-- The cart lives in memory, so it resets when the server restarts. The store
-  module (`backend/src/store/cart.js`) is isolated behind a small interface so
-  it can be swapped for a database without touching the routes.
+- The cart and orders live in memory, so they reset when the server restarts.
+  The store modules (`backend/src/store/`) are isolated behind small interfaces
+  so they can be swapped for a database without touching the routes.
+- Tax rate, shipping cost, and the free-shipping threshold are constants at the
+  top of `backend/src/store/orders.js`.
 - Product images are placeholders from picsum.photos.
