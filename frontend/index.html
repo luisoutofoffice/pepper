@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pepper — Coffee Cart</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <h1>☕ Pepper Coffee</h1>
+      <button id="cart-toggle" class="cart-toggle" aria-label="Open cart">
+        Cart <span id="cart-count" class="badge">0</span>
+      </button>
+    </header>
+
+    <main>
+      <section aria-labelledby="catalog-heading">
+        <h2 id="catalog-heading">Shop</h2>
+        <div id="products" class="product-grid">
+          <p class="muted">Loading products…</p>
+        </div>
+      </section>
+    </main>
+
+    <aside id="cart-drawer" class="cart-drawer" aria-hidden="true">
+      <div class="cart-header">
+        <h2>Your Cart</h2>
+        <button id="cart-close" class="icon-btn" aria-label="Close cart">✕</button>
+      </div>
+      <div id="cart-items" class="cart-items"></div>
+      <div class="cart-footer">
+        <div class="subtotal-row">
+          <span>Subtotal</span>
+          <span id="cart-subtotal">$0.00</span>
+        </div>
+        <button id="clear-cart" class="secondary-btn">Clear cart</button>
+        <button id="checkout" class="primary-btn">Checkout</button>
+      </div>
+    </aside>
+
+    <div id="overlay" class="overlay" hidden></div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
